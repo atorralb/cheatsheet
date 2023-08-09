@@ -1,18 +1,23 @@
-\section{History Expansion}
-
-\textit{History expansion offers advanced techniques, but it is often better to use emacs or vi-style command editing instead.}
+\section{Networking}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Event Designators}
-\begin{tabular}{l  l}
-    !       & start hist substitution \\
-    !!      & last command \\
-    !<int>  & <int>th command \\
-    !-<int> & <int>th previous cmd \\
-    !<str>  & most recent cmd with <str> \\
-    !?<str>?    & most recent cmd $\ni$ <str> \\
-    \textasciicircum <s1>\textasciicircum <s2>  & repeat match with subs \\
-\end{tabular}
+\subsection*{ping}
+\text{To send a defined number of packets}
+\text{\color{myblue}ping -c 3 google.com }
+
+\subsection*{netstat}
+\text{app started and aware of PID, this finds port}
+\text{\color{myblue}netstat -anlp |grep 3937}\\
+\text{check if port 80 is being used}
+\text{\color{myblue}netstat -anlp |grep 80 | grep LISTEN}
+
+\subsection*{nc a.k.a netcat}
+\text{file transfer}\\
+\text{\color{myblue}nc -w 3 192.168.1.100 1234 < myfile.txt}\\
+
+\subsection*{ss}
+\text{showing just the first few lines of the command’s output along with a single line including IP addresses:}\\
+\text{\color{myblue}ss | head -3; ss | grep 192 | tail -1}\\
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

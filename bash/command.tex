@@ -3,59 +3,86 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Wildcards}
+\subsection*{print controls}
 
 \begin{tabular}{l   l}
-    \textasciitilde & expand to user\textquotesingle s home dir \\
-    ? & match a single char\\
-    * & match string of chars\\
-    {[ \,\,\, ]} & any char in set\\
-    {[! \,\, ]} & any char not in set\\
-    \{ \,\,\, \} & expands to all alternatives \\
-    \textbackslash <char>  & escape <char> to normal \\
-    \textquotesingle <wild> \textquotesingle & wildcard $\to$ literal \\
-    \textbackslash & line continuation \\
+	\textbackslash & line continuation \\
+ 	in & echo "'1'" "'2'"  \textbackslash \Return "3" \\
+    	out &  1 2 3\\
+    	\textbackslash t & horizontal tab\\
+	\textbackslash r & carriage return\\
+	\textbackslash n& new line\\
+	\textbackslash b & back space\\
+	\textbackslash \textbackslash & backslash\\
+	\textbackslash " & double quote\\
+	\#  &	comment \\
 \end{tabular}
 
-\textit{Examples:}\\
-\entry{35mm}{[abc]}{set match}\\
-\entry{35mm}{[a-c]}{same as above}\\
-\entry{35mm}{\textasciitilde alice}{alice\textquotesingle s home}\\
-\entry{35mm}{ls *.\{c,h,o\}}{C program files}\\
-\entry{35mm}{find . -name \textquotesingle *.c \textquotesingle }{{\footnotesize delay wildcd expand}}\\
-\entry{35mm}{echo \textquotesingle 2 * 3 > 5\textquotesingle}{wildcd $\to$ literals}\\
+\subsection*{operators}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Quoting Rules}
-
-\textit{Single quotes around strings suppress all wildcard expansion; double quotes suppress everything but \$\{\dots\} expansion. In general, use single quotes, except when requiring dollar-sign expansion.} 
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Control Keys}
-
-\textit{Use }\textbf{trap}\textit{ to handle signals, which are issued like:}\\
-\begin{tabular}{l  l}
-    ctrl-c & stop current command \\
-    ctrl-d & end of input \\ 
-    ctrl-\textbackslash & quit \\ 
-    ctrl-s & halt output to screen \\ 
-    ctrl-q & restart output to screen \\ 
-    ctrl-? & erase last character \\ 
-    ctrl-u & erase entire command line \\ 
-    ctrl-z & suspend current command \\ 
+\begin{tabular}{l   l}
+    + & sum\\
+    - & rest\\
+	\textbackslash\text{*}  & multiplication\\
+	/ & division\\
+    -gt &   greater than\\
+    -lt &   less than\\
 \end{tabular}
 
+\subsection*{Numerics}
+\textit{\say{Numeric expansion} is indicated by }\texttt{\$(( <expr> ))}\textit{ syntax, where }\texttt{<expr>}\textit{ allows a wide range of simple mathmatical expressions.}\\
+\entry{35mm}{\$(( 365 - \$(date +\%j) ))}{wks to new year \Smiley}\\
+\entry{45mm}{[ \textbackslash ( 2 -gt 2\textbackslash) \&\& \textbackslash ( 4 -le 1 \textbackslash) ]}{good}\\
+\entry{45mm}{[ \$(( (3 > 2) \&\& (4 <= 1) )) = 1 ]}{better}\\
+\entry{45mm}{(( (3 > 2) \&\& (4 <= 1) ))}{best}\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{variables}
+
+\text{a=\textquotedbl a\textquotedbl}
+\text{b=\textquotedbl b\textquotedbl}\\
+\text{echo \textquotedbl\$\{a\} \$\{b\}}\textquotedbl\\
+\text{output ab}
+
+
+\subsection*{write to files}
+
+\text{\color{myblue}echo \textquotedbl string to write\textquotedbl > ./file.txt}
+
+\subsection*{create a symbolic link and write to the symlink}
+
+\text{\color{myblue}ln -s file.txt fileLink}
+\text{\color{myblue}echo \textquotedbl string\textquotedbl  >> fileLink}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Hot Keys (\say{bindings})}
 
-\textbf{bind}\textit{ ties key sequences to certain activities. System-wide bindings are in }\texttt{/etc/inputrc}\textit{ and user-specific in }\texttt{\textasciitilde/.inputrc}\textit{. These customizations control the command-line interpreter, which is named }\textbf{readline}.\\
-\entry{35mm}{bind \textquotesingle \textquotedbl \textbackslash C-t\textquotedbl : \textquotedbl test\textquotedbl  \textquotesingle}{bind string test}\\
-\entry{35mm}{bind -x \textquotesingle \textquotedbl \textbackslash C-t\textquotedbl : \textquotedbl date\textquotedbl  \textquotesingle}{bind e\ul{x}ecutable}\\
-\entry{35mm}{bind -l}{list bindable f\textquotesingle ns}\\
-\entry{35mm}{bind -P}{list all bindings}\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Input / Output Processing}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Examples / Idioms}
+
+\entry{34mm}{\textquotedbl \$@\textquotedbl > logfile > 2>\&1 \&}{bg job; err, out to log}\\
+\entry{34mm}{\textquotedbl \$@\textquotedbl  | tee logfile \&}{ibid (synonym)}\\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Synopsis}
+
+
+\begin{tabular}{@{}l l l l}
+    |           & pipe          & >             & std out  \\
+    <           & std in        & >{}>          & append out \\
+    >|          & force out     & \textit{n}>|  & force to \textit{n} \\
+    <>          & in \& out     & \textit{n}<>  & in, out to \textit{n} \\
+    <{}<        & \say{here doc} & \textit{n}>  & out to FD \textit{n} \\
+    <\textit{n} & FD in \textit{n} & \textit{n}>{}> & FD append \textit{n} \\ 
+    \textit{n}>\&  & dup out    & \textit{n}<\& & dup in, FD \textit{n} \\
+    \textit{n}>\&\textit{m} & \textit{n} follows \textit{m} & \textit{n}<\&\textit{m} & \textit{n} follows \textit{m}  \\
+    \&>         & out \& err    & <\&-     & close std in \\
+    >\&-        & close s-out   & \textit{n}>\&- & close \textit{n}-out \\
+\end{tabular}

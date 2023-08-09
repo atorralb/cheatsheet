@@ -64,17 +64,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Case}
-
-\entry{25mm}{case <expr> in}{<expr> is a string}\\
-\entry{25mm}{\phantom{\quad}<ptrn> )}{<ptrn> is another string}\\
-\entry{25mm}{\phantom{\quad\quad}<stmt>* ;;}{note double ; to end}\\
-\entry{25mm}{\phantom{\quad}<ptrn> )}{as many cases as needed}\\
-\entry{25mm}{\phantom{\quad\quad}<stmt>* ;;}{}\\
-\entry{28mm}{\phantom{\quad}<ptrn>|<ptrn> )}{log\textquotesingle ly ORed <ptrn>s}\\
-\entry{25mm}{\phantom{\quad\quad}<stmt>* ;;}{}\\
-\entry{25mm}{\phantom{\quad}* )}{optional \say{catch-all} case}\\
-\entry{25mm}{\phantom{\quad\quad}<stmt>* ;;}{}\\
-\entry{25mm}{esac}{on its own line}\\
+\code{\#\!/bin/bash}\\
+\code{if [ \$\# != 0 ]}\\
+\code{then}\\
+\code{ss=\textquotedbl ss -a\textquotedbl }\\
+\code{else}\\
+  \code{ss=\textquotedbl  ss\textquotedbl}\\
+\code{fi}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
