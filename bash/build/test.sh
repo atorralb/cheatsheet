@@ -1,5 +1,8 @@
 https://www-users.york.ac.uk/~mijp1/teaching/2nd_year_Comp_Lab/guides/grep_awk_sed.pdf
-
+https://exercism.org/tracks/bash/exercises/raindrops
+https://www.sql-practice.com/
+https://www.codingame.com/start/
+https://www.learnshell.org/en/Passing_Arguments_to_the_Script
 #REGEX
 # match any digit character from 0 to 9
 \d
