@@ -45,7 +45,12 @@ cat awkvars.out
 grep and sed and tr and sort 
 
 
-Subshells
+#Subshells
+# normal
+$ pwd ; ls ; cd /etc ; pwd ; cd ; pwd ; ls
+
+# subshell
+$ (pwd ; ls ; cd /etc ; pwd ; cd ; pwd ; ls)
 Arguments
 Environmental Variables
 Arguments
