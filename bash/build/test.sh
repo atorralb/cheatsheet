@@ -13,6 +13,29 @@ https://www.learnshell.org/en/Passing_Arguments_to_the_Script
 #both lowercase and uppercase letter and special characters
 [A-Za-z]
 
+#separate lines
+printf "%s\n" print arguments on seperate lines
+print
+arguments
+on
+seperate
+lines
+
+#print integers
+printf "%d\n" 1 2 3
+1
+2
+3
+
+#print decimal fractions
+printf "%f\n 1.24 1.0001 3
+1.24
+1.0001
+3.0000
+#print tabular spaces
+printf "%12.4s %9.2f\n" john 2 Jackson 4.57
+        john      2.00
+        Jack      4.57
 
 
 #find
